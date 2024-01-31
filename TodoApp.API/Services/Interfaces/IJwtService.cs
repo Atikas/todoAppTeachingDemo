@@ -1,7 +1,8 @@
-﻿namespace TodoApp.API.Services.Interfaces;
+﻿using TodoApp.DAL.Entities;
 
-//------------------------------------------------------------------------------------
+namespace TodoApp.API.Services.Interfaces;
+
 public interface IJwtService
 {
-    string GetJwtToken(string username, string role);
+    string GetJwtToken(Account account);
 }

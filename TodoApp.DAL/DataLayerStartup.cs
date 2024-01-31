@@ -16,6 +16,8 @@ namespace TodoApp.DAL
             });
 
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<ITodoRepository, TodoRepository>();
         }
     }
 }

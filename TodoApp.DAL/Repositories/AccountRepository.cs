@@ -8,13 +8,16 @@ public class AccountRepository : IAccountRepository
 
     public AccountRepository(TodoAppContext context)
     {
+        //context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
         _context = context;
     }
 
-    public void Create(Account model)
+    public Guid Create(Account model)
     {
         _context.Accounts.Add(model);
         _context.SaveChanges();
+        return model.Id;
     }
     public Account? Get(string userName)
     {

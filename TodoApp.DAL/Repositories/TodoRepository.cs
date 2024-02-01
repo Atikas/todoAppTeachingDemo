@@ -13,5 +13,9 @@ namespace TodoApp.DAL.Repositories
         {
             return _context.TodoItems.Include(x => x.Images);
         }
+        override public  TodoItem? Get(long id)
+        {
+            return _context.TodoItems.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
+        }
     }
 }

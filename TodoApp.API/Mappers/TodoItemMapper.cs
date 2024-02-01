@@ -25,8 +25,7 @@ namespace TodoApp.API.Mappers
                 CreatedAt = entity.CreatedAt,
                 Due = entity.Due,
                 CompletedAt = entity.CompletedAt,
-                ImageCount = entity.Images?.Count ?? 0,
-
+                ImageIds = entity.Images.Any() ? entity.Images.Select(i => i.Id) : null,
             };
         }
         public List<TodoItemResultDto> Map(IEnumerable<TodoItem> entities)

@@ -13,6 +13,7 @@ namespace TodoApp.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public class TodoController : ControllerBase
     {

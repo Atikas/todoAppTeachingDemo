@@ -6,10 +6,10 @@ namespace TodoApp.DAL.Entities
     public class Image
     {
         [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public byte[] ImageBytes { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public byte[] ImageBytes { get; set; } = null!;
 
         [ForeignKey(nameof(TodoItem))]
         public long TodoItemId { get; set; }

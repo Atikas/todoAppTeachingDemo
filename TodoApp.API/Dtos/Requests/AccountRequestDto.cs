@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TodoApp.API.Validators;
 
-namespace TodoApp.API.Dtos
+namespace TodoApp.API.Dtos.Requests
 {
     public record AccountRequestDto
     {
@@ -31,6 +31,6 @@ namespace TodoApp.API.Dtos
         public string? Role { get; set; }
     }
 
-    
-   
+
+
 }

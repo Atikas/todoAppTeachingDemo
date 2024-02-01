@@ -23,7 +23,7 @@ public class RoleValidatorAttribute : ValidationAttribute
             return new ValidationResult("Role must be either Admin or User.");
         }
 
-        return ValidationResult.Success;
+        return ValidationResult.Success!;
     }
 }
 

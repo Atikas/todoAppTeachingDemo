@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
-using TodoApp.API.Dtos;
+using TodoApp.API.Dtos.Requests;
 using TodoApp.API.Mappers.Interfaces;
 using TodoApp.API.Services.Interfaces;
 using TodoApp.BLL.Services.Interfaces;

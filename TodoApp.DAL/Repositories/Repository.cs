@@ -3,14 +3,15 @@ using TodoApp.DAL.Repositories.Interfaces;
 
 namespace TodoApp.DAL.Repositories
 {
-    public abstract class Repository<T>: IRepository<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
 
-        protected readonly DbContext _context;
+        protected readonly TodoAppContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(TodoAppContext context)
         {
+            context.Database.EnsureCreated();
             _context = context;
             _dbSet = context.Set<T>();
         }
@@ -19,13 +20,13 @@ namespace TodoApp.DAL.Repositories
         {
             return _dbSet;
         }
-        public virtual T? Get(long id) 
-        { 
-            return _dbSet.Find(id); 
+        public virtual T? Get(long id)
+        {
+            return _dbSet.Find(id);
         }
         public virtual void Add(T entity)
         {
-            _dbSet.Add(entity); 
+            _dbSet.Add(entity);
             _context.SaveChanges();
         }
         public virtual void Update(T entity)
@@ -39,6 +40,5 @@ namespace TodoApp.DAL.Repositories
             _dbSet.Remove(entity);
             _context.SaveChanges();
         }
-
     }
 }

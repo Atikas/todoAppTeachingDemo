@@ -51,8 +51,8 @@ namespace TodoApp.DAL.InitialData
                 Title = "Call plumber",
                 Description = "",
                 CreatedAt = new DateTime(2024,1,1),
-                Due = new DateTime(2024,1,1),
-                CompletedAt = null,
+                Due = new DateTime(2024,1,2),
+                CompletedAt = new DateTime(2024,1,2),
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
             },
             new TodoItem
@@ -62,8 +62,8 @@ namespace TodoApp.DAL.InitialData
                 Title = "Call electrician",
                 Description = "",
                 CreatedAt = new DateTime(2024,1,1),
-                Due = new DateTime(2024,1,1),
-                CompletedAt = null,
+                Due = new DateTime(2024,1,3),
+                CompletedAt = new DateTime(2024,1,4),
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
             },
             new TodoItem

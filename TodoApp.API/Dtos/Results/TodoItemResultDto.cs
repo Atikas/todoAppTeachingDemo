@@ -1,4 +1,4 @@
-﻿namespace TodoApp.API.Dtos
+﻿namespace TodoApp.API.Dtos.Results
 {
     public class TodoItemResultDto
     {
@@ -9,6 +9,7 @@
         public DateTime CreatedAt { get; set; }
         public DateTime? Due { get; set; }
         public DateTime? CompletedAt { get; set; }
+        public int ImageCount { get; set; }
 
     }
 }

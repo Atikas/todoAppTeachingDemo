@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using TodoApp.API.Mappers;
@@ -24,6 +26,25 @@ namespace TodoApp.API
             builder.Services.ConfigureDataLayerServices(builder.Configuration);
 
             builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)//musu auth schema bus kas nesa jwt, tas yra prisistates
+              .AddJwtBearer(
+              options =>
+              {
+                  var secretKey = builder.Configuration.GetSection("Jwt:Key").Value;
+                  var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey));
+                  options.TokenValidationParameters = new TokenValidationParameters
+                  {
+                      ValidateIssuer = true,
+                      ValidateAudience = true,
+                      ValidateLifetime = true,
+                      ValidateIssuerSigningKey = true,
+                      ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
+                      ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
+                      IssuerSigningKey = key
+                  };
+              });
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

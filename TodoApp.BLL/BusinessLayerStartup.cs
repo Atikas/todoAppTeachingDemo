@@ -9,5 +9,6 @@ public static class BusinessLayerStartup
     public static void ConfigureBusinessLayerServices(this IServiceCollection services)
     {
         services.AddTransient<IAccountService, AccountService>();
+        services.AddTransient<IEmailService, EmailService>();
     }
 }

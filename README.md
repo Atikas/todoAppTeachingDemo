@@ -10,7 +10,7 @@ Using a Todo application as the project's backbone, we aim to cover essential to
 - Designing and implementing models, controllers, and routes
 - Performing CRUD operations
 - Integrating with a database using Entity Framework Core
-- Implementing authentication and authorization
+- Implementing role based authentication and authorization
 - Error handling and validation
 - Logging
 - OpenAPI documentation

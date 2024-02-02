@@ -15,12 +15,22 @@ public class AccountRepository : IAccountRepository
 
     public Guid Create(Account model)
     {
+        if (model == null)
+            throw new ArgumentNullException(nameof(model));
+        
+        var exists = _context.Accounts.Any(x => x.UserName == model.UserName);
+        if (exists)
+            throw new ArgumentException("Username already exists");
+        
         _context.Accounts.Add(model);
         _context.SaveChanges();
         return model.Id;
     }
     public Account? Get(string userName)
     {
+        if (userName == null)
+               throw new ArgumentNullException(nameof(userName));
+        
         return _context.Accounts.FirstOrDefault(x => x.UserName == userName);
     }
     public bool Exists(Guid id)

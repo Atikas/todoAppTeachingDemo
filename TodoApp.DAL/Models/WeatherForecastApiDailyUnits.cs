@@ -1,12 +1,23 @@
-﻿namespace TodoApp.DAL.Models
+﻿using Newtonsoft.Json;
+
+namespace TodoApp.DAL.Models
 {
     public class WeatherForecastApiDailyUnits
     {
-        public string time { get; set; }
-        public string temperature_2m_max { get; set; }
-        public string temperature_2m_min { get; set; }
-        public string precipitation_sum { get; set; }
-        public string wind_speed_10m_max { get; set; }
+        [JsonProperty("time")]
+        public string Time { get; set; }
+
+        [JsonProperty("temperature_2m_max")]
+        public string Temperature2mMax { get; set; }
+
+        [JsonProperty("temperature_2m_min")]
+        public string Temperature2mMin { get; set; }
+
+        [JsonProperty("precipitation_sum")]
+        public string PrecipitationSum { get; set; }
+
+        [JsonProperty("wind_speed_10m_max")]
+        public string WindSpeed10mMax { get; set; }
     }
 
 

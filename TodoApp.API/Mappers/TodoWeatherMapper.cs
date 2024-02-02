@@ -12,15 +12,15 @@ namespace TodoApp.API.Mappers
         public List<TodoWeatherResultDto> Map(WeatherForecastApiResult item)
         {
             var result = new List<TodoWeatherResultDto>();
-            for (int i = 0; i < item.daily.time.Length; i++)
+            for (int i = 0; i < item.Daily.time.Length; i++)
             {
                 result.Add(new TodoWeatherResultDto
                 {
-                    Day = item.daily.time[i],
-                    TemperatureMin = $"{item.daily.temperature_2m_min[i]}{item.daily_units.temperature_2m_min}",
-                    TemperatureMax = $"{item.daily.temperature_2m_max[i]}{item.daily_units.temperature_2m_max}",
-                    Precipitation = $"{item.daily.precipitation_sum[i]}{item.daily_units.precipitation_sum}",
-                    Wind = $"{item.daily.wind_speed_10m_max[i]}{item.daily_units.wind_speed_10m_max}"
+                    Day = item.Daily.time[i],
+                    TemperatureMin = $"{item.Daily.temperature_2m_min[i]}{item.DailyUnits.Temperature2mMin}",
+                    TemperatureMax = $"{item.Daily.temperature_2m_max[i]}{item.DailyUnits.Temperature2mMax}",
+                    Precipitation = $"{item.Daily.precipitation_sum[i]}{item.DailyUnits.PrecipitationSum}",
+                    Wind = $"{item.Daily.wind_speed_10m_max[i]}{item.DailyUnits.WindSpeed10mMax}"
                 });
             }
             return result;

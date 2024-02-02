@@ -12,6 +12,7 @@ Using a Todo application as the project's backbone, we aim to cover essential to
 - Integrating with a database using Entity Framework Core
 - Implementing role based authentication and authorization
 - Error handling and validation
+- Consuming third-part API (Open Meteo)
 - Logging
 - OpenAPI documentation
 - Best practices for structuring and testing your API

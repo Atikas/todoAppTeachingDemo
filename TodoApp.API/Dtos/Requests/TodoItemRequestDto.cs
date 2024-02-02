@@ -6,7 +6,7 @@ namespace TodoApp.API.Dtos
     public class TodoItemRequestDto
     {
         /// <summary>
-        /// Type for the todo item, can be one of the following: 'Holiday', 'Work', 'Shopping', 'Other'
+        /// Type for the todoitem, can be one of the following: 'Holiday', 'Work', 'Shopping', 'Other'
         /// </summary>
         [Required]
         [StringLength(100)]
@@ -14,26 +14,32 @@ namespace TodoApp.API.Dtos
         public string? Type { get; set; }
 
         /// <summary>
-        /// Title for the todo item
+        /// Title for the todoitem
         /// </summary>
         [Required]
         [StringLength(100)]
         public string? Title { get; set; }
 
         /// <summary>
-        /// Description for the todo item
+        /// Description for the todoitem
         /// </summary>
         [StringLength(1000)]
         public string? Description { get; set; }
 
         /// <summary>
-        /// Date and time when the todo item is due
+        /// Place for the todoitem to be done
+        /// </summary>
+        [StringLength(100)]
+        public string? Place { get; set; }
+
+        /// <summary>
+        /// Date and time when the todoitem is due
         /// </summary>
         [GreaterOrEqualToToday]
         public DateTime? Due { get; set; }
 
         /// <summary>
-        /// Date and time when the todo item was completed
+        /// Date and time when the todoitem was completed
         /// </summary>
         [GreaterOrEqualToToday]
         public DateTime? CompletedAt { get; set; }

@@ -1,6 +1,7 @@
 ﻿using TodoApp.API.Dtos;
 using TodoApp.API.Dtos.Results;
 using TodoApp.DAL.Entities;
+using TodoApp.DAL.Models;
 
 namespace TodoApp.API.Mappers.Interfaces
 {

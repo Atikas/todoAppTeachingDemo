@@ -48,7 +48,7 @@ namespace TodoApp.API.Controllers
         public IActionResult Get()
         {
             _logger.LogInformation($"Getting all todos for user {_userId}");
-            var entities = _repository.GetAll(include => include.Images).Where(e => e.AccountId == _userId);
+            var entities = _repository.GetAll().Where(e => e.AccountId == _userId);
             var dtos = _mapper.Map(entities);
             return Ok(dtos);
         }
@@ -62,7 +62,7 @@ namespace TodoApp.API.Controllers
         [ProducesResponseType(typeof(TodoItemResultDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(MediaTypeNames.Application.Json)]
-        public IActionResult Get(long id)
+        public async Task<IActionResult> Get(long id)
         {
             _logger.LogInformation($"Getting todo with id {id} for user {_userId}");
             var entity = _repository.Get(id);
@@ -71,6 +71,7 @@ namespace TodoApp.API.Controllers
                 _logger.LogInformation($"Todo with id {id} for user {_userId} not found");
                 return NotFound();
             }
+
             var dto = _mapper.Map(entity);
             return Ok(dto);
         }
@@ -134,6 +135,37 @@ namespace TodoApp.API.Controllers
             _repository.Update(entity);
             return NoContent();
         }
+
+
+        [HttpPut("{id}/updateDue")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [Consumes(MediaTypeNames.Multipart.FormData)]
+        public IActionResult UpdateDue([FromRoute]long id, [FromForm]DateTime due)
+        {
+            _logger.LogInformation($"Updating due date for todo with id {id} for user {_userId}");
+            var entity = _repository.Get(id);
+            if (entity == null)
+            {
+                _logger.LogInformation($"Todo with id {id} for user {_userId} not found");
+                return NotFound();
+            }
+            if (entity.AccountId != _userId)
+            {
+                _logger.LogInformation($"Todo with id {id} for user {_userId} is forbidden");
+                return Forbid();
+            }
+
+            entity.Due = due;
+            _repository.Update(entity);
+            return NoContent();
+        }
+
+
+
 
         /// <summary>
         /// deletes a todoitem for a user

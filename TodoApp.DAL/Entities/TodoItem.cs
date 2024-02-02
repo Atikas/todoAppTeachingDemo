@@ -10,6 +10,7 @@ namespace TodoApp.DAL.Entities
         public string Type { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
+        public string? Place { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? Due { get; set; }
         public DateTime? CompletedAt { get; set; }

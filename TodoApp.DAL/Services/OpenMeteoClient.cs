@@ -7,13 +7,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TodoApp.DAL.Models;
+using TodoApp.DAL.Services.Services;
 
 namespace TodoApp.DAL.Services
 {
-    public interface IOpenMeteoClient
-    {
-        Task<GeocodingApiSearchResult?> GetGeocodingAsync(string location);
-    }
     public class OpenMeteoClient: IOpenMeteoClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -23,17 +20,29 @@ namespace TodoApp.DAL.Services
             _httpClientFactory = httpClientFactory;
             _logger = logger;
         }
-        public async Task<dynamic> GetWeatherForecastAsync()
+        public async Task<WeatherForecastApiResult?> GetWeatherForecastAsync(double latitude, double longitude)
         {
+            _logger.LogInformation("GetWeatherForecastAsync called with latitude: {latitude}, longitude: {longitude}", latitude, longitude);
             var httpClient = _httpClientFactory.CreateClient("WeatherForecastApi");
             var route = "forecast";
-            var query = "?latitude=48.8566&longitude=2.3522&current_weather=true&timezone=Europe/Paris";
-            var response = await httpClient.GetAsync($"{route}?{query}");
-            if (response.IsSuccessStatusCode)
+            var query = $"latitude={latitude}&longitude={longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max";
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                //var res = JsonConvert.DeserializeObject<List<BookApiModel>>(content);
-                //return res;
+                var response = await httpClient.GetAsync($"{route}?{query}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var res = JsonConvert.DeserializeObject<WeatherForecastApiResult>(content);
+                    return res;
+                }
+                else
+                {
+                    _logger.LogWarning("GetWeatherForecastAsync failed with latitude: {latitude}, longitude: {longitude}", latitude, longitude);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetWeatherForecastAsync failed with latitude: {latitude}, longitude: {longitude}", latitude, longitude);
             }
 
             return null;

@@ -5,5 +5,4 @@
         public List<GeocodingApiSearchResultItem> results { get; set; }
 
     }
-
 }

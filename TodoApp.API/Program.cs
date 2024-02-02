@@ -23,6 +23,7 @@ namespace TodoApp.API
             builder.Services.AddTransient<IAccountMapper, AccountMapper>();
             builder.Services.AddTransient<ITodoItemMapper, TodoItemMapper>();
             builder.Services.AddTransient<IImageMapper, ImageMapper>();
+            builder.Services.AddTransient<ITodoWeatherMapper, TodoWeatherMapper>();
 
             builder.Services.ConfigureBusinessLayerServices();
             builder.Services.ConfigureDataLayerServices(builder.Configuration);

@@ -5,9 +5,11 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.API", "TodoApp.API\TodoApp.API.csproj", "{F8465AB8-C0C6-46DF-B5B2-A535FA2C8F6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.DAL", "TodoApp.DAL\TodoApp.DAL.csproj", "{CB5149BC-4DF2-4486-A1DB-D9E9B750F20A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.DAL", "TodoApp.DAL\TodoApp.DAL.csproj", "{CB5149BC-4DF2-4486-A1DB-D9E9B750F20A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.BLL", "TodoApp.BLL\TodoApp.BLL.csproj", "{0F7848F0-D933-4EC7-A736-6DEB3593A215}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.BLL", "TodoApp.BLL\TodoApp.BLL.csproj", "{0F7848F0-D933-4EC7-A736-6DEB3593A215}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DAFD1304-E266-4B0C-BA98-1CA0532B277B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

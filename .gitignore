@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/TodoApp.API/TodoDatabase.db
+/TodoApp.API/TodoDatabase.db-shm
+/TodoApp.API/TodoDatabase.db-wal

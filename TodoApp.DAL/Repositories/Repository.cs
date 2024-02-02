@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using TodoApp.DAL.Repositories.Interfaces;
 
 namespace TodoApp.DAL.Repositories
@@ -15,11 +16,16 @@ namespace TodoApp.DAL.Repositories
             _context = context;
             _dbSet = context.Set<T>();
         }
-
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeProperties)
         {
-            return _dbSet;
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return query;
         }
+
         public virtual T? Get(long id)
         {
             return _dbSet.Find(id);

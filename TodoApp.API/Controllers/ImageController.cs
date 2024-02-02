@@ -60,7 +60,7 @@ namespace TodoApp.API.Controllers
                 _logger.LogInformation($"Todo with id {todoItemId} for user {_userId} is forbidden");
                 return Forbid();
             }
-            var entities = _imageRepository.GetAll().Where(e => e.TodoItemId == todoItemId);
+            var entities = _imageRepository.GetAll(include => include.TodoItem).Where(e => e.TodoItemId == todoItemId);
             var dtos = _mapper.Map(entities);
             return Ok(dtos);
         }

@@ -48,7 +48,7 @@ namespace TodoApp.API.Controllers
         public IActionResult Get()
         {
             _logger.LogInformation($"Getting all todos for user {_userId}");
-            var entities = _repository.GetAll().Where(e => e.AccountId == _userId);
+            var entities = _repository.GetAll(include => include.Images).Where(e => e.AccountId == _userId);
             var dtos = _mapper.Map(entities);
             return Ok(dtos);
         }

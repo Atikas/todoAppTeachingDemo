@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.BLL", "TodoApp.BLL\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DAFD1304-E266-4B0C-BA98-1CA0532B277B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.BLLTests", "TodoApp.BLLTests\TodoApp.BLLTests.csproj", "{6F9D502E-F642-40BC-8013-38D214B86C54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,9 +31,16 @@ Global
 		{0F7848F0-D933-4EC7-A736-6DEB3593A215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F7848F0-D933-4EC7-A736-6DEB3593A215}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F7848F0-D933-4EC7-A736-6DEB3593A215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9D502E-F642-40BC-8013-38D214B86C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9D502E-F642-40BC-8013-38D214B86C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9D502E-F642-40BC-8013-38D214B86C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9D502E-F642-40BC-8013-38D214B86C54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F9D502E-F642-40BC-8013-38D214B86C54} = {DAFD1304-E266-4B0C-BA98-1CA0532B277B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB699F88-F950-49C1-A9FA-6BBAADBC77D4}

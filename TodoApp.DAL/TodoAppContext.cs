@@ -6,6 +6,7 @@ namespace TodoApp.DAL
 {
     public class TodoAppContext: DbContext
     {
+        public bool SkipSeeding { get; set; } = false;
         public TodoAppContext(DbContextOptions<TodoAppContext> options) : base(options)
         {
         }
@@ -16,14 +17,17 @@ namespace TodoApp.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>()
+            if (!SkipSeeding)
+            {
+                modelBuilder.Entity<Account>()
                 .HasData(UsersInitialDataSeed.Accounts);
 
-            modelBuilder.Entity<TodoItem>()
-                .HasData(TodoItemsInitialDataSeed.TodoItems);
+                modelBuilder.Entity<TodoItem>()
+                    .HasData(TodoItemsInitialDataSeed.TodoItems);
 
-            modelBuilder.Entity<Image>()
-                .HasData(ImagesInitialDataSeed.Images);
+                modelBuilder.Entity<Image>()
+                    .HasData(ImagesInitialDataSeed.Images);
+            }
 
             modelBuilder.Entity<Image>()
                 .HasOne(i => i.TodoItem)

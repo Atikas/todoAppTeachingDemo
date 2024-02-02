@@ -8,7 +8,7 @@ namespace TodoApp.DAL.Repositories.Tests;
 
 public class AccountRepositoryTests
 {
-    private readonly TodoAppContext context;
+    private readonly TodoAppContext _context;
     private readonly IAccountRepository _accountRepository;
 
     public AccountRepositoryTests()
@@ -16,8 +16,8 @@ public class AccountRepositoryTests
         var options = new DbContextOptionsBuilder<TodoAppContext>()
             .UseInMemoryDatabase(databaseName: "TestDatabase" + Guid.NewGuid())
             .Options;
-        context = new TodoAppContext(options);
-        _accountRepository = new AccountRepository(context);
+        _context = new TodoAppContext(options) { SkipSeeding = true };
+        _accountRepository = new AccountRepository(_context);
     }
     [Fact]
     public void Create_ValidAccount_ReturnsNonNullId()
@@ -66,7 +66,8 @@ public class AccountRepositoryTests
             PasswordSalt = Encoding.UTF8.GetBytes("fakePasswordSalt"),
             Role = "user"
         };
-        _accountRepository.Create(account);
+        _context.Accounts.Add(account);
+        _context.SaveChanges();
 
         // Act
         var result = _accountRepository.Get(account.UserName);
@@ -105,7 +106,10 @@ public class AccountRepositoryTests
             PasswordSalt = Encoding.UTF8.GetBytes("fakePasswordSalt"),
             Role = "user"
         };
-        var id = _accountRepository.Create(account);
+        _context.Accounts.Add(account);
+        _context.SaveChanges();
+
+        var id = account.Id;
 
         // Act
         _accountRepository.Delete(id);

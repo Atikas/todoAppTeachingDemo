@@ -136,7 +136,12 @@ namespace TodoApp.API.Controllers
             return NoContent();
         }
 
-
+        /// <summary>
+        /// updates a todoitem due date property for a user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="due"></param>
+        /// <returns></returns>
         [HttpPut("{id}/updateDue")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

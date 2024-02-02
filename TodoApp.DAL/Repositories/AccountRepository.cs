@@ -23,4 +23,17 @@ public class AccountRepository : IAccountRepository
     {
         return _context.Accounts.FirstOrDefault(x => x.UserName == userName);
     }
+    public bool Exists(Guid id)
+    {
+        return _context.Accounts.Any(x => x.Id == id);
+    }
+    public void Delete(Guid id)
+    {
+        var account = _context.Accounts.Find(id);
+        if (account != null)
+        {
+            _context.Accounts.Remove(account);
+            _context.SaveChanges();
+        }
+    }
 }

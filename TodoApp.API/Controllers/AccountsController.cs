@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using TodoApp.API.Dtos.Requests;
 using TodoApp.API.Mappers.Interfaces;
@@ -81,6 +82,27 @@ namespace TodoApp.API.Controllers
             var jwt = _jwtService.GetJwtToken(account);
             return Ok(jwt);
             
+        }
+
+        /// <summary>
+        /// remove a user account. for admin only.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Delete(Guid id)
+        {
+            _logger.LogInformation($"Deleting account {id}");
+            if (!_repository.Exists(id))
+            {
+                _logger.LogInformation($"Account {id} not found");
+                return NotFound();
+            }
+            _repository.Delete(id);
+            return NoContent();
         }
     }
 }

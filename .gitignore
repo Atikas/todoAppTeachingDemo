@@ -364,3 +364,6 @@ FodyWeavers.xsd
 /TodoApp.API/TodoDatabase.db
 /TodoApp.API/TodoDatabase.db-shm
 /TodoApp.API/TodoDatabase.db-wal
+/back-end/src/TodoApp.API/TodoDatabase.db
+/back-end/src/TodoApp.API/TodoDatabase.db-shm
+/back-end/src/TodoApp.API/TodoDatabase.db-wal

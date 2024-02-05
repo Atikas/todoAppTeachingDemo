@@ -41,7 +41,7 @@ namespace TodoApp.API.Dtos
         /// <summary>
         /// Date and time when the todoitem was completed
         /// </summary>
-        [GreaterOrEqualToToday]
+        [LessOrEqualToToday]
         public DateTime? CompletedAt { get; set; }
 
     }

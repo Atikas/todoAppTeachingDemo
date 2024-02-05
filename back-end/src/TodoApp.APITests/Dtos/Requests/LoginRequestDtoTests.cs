@@ -12,8 +12,8 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = null,
-                Password = "P@$$w0rd",
+                UserName = null, //<-- this is testing value
+                Password = "P@$$w0rd", 
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();
@@ -31,7 +31,7 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = "ab",
+                UserName = "ab", //<-- this is testing value
                 Password = "P@$$w0rd",
             };
             var validationContext = new ValidationContext(dto);
@@ -50,7 +50,7 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = "abc",
+                UserName = "abc", //<-- this is testing value
                 Password = "P@$$w0rd",
             };
             var validationContext = new ValidationContext(dto);
@@ -69,7 +69,7 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = new string('a', 50),
+                UserName = new string('a', 50), //<-- this is testing value
                 Password = "P@$$w0rd",
             };
             var validationContext = new ValidationContext(dto);
@@ -88,7 +88,7 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = new string('a', 51),
+                UserName = new string('a', 51), //<-- this is testing value
                 Password = "P@$$w0rd",
             };
             var validationContext = new ValidationContext(dto);
@@ -107,8 +107,8 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = "abc",
-                Password = null,
+                UserName = "abcde",
+                Password = null, //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();
@@ -126,8 +126,8 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = "abc",
-                Password = "P@$$w0rd",
+                UserName = "abcde",
+                Password = "P@$$w0rd", //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();
@@ -145,8 +145,8 @@ namespace TodoApp.APITests.Dtos.Requests
             // Arrange
             var dto = new LoginRequestDto
             {
-                UserName = "abc",
-                Password = "p",
+                UserName = "abcde",
+                Password = "p", //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();

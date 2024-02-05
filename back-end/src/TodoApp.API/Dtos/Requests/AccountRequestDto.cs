@@ -22,6 +22,7 @@ namespace TodoApp.API.Dtos.Requests
         /// Email of the account
         /// </summary>
         [EmailAddress]
+        [EmailDomainValidator]
         public string? Email { get; set; }
 
         /// <summary>

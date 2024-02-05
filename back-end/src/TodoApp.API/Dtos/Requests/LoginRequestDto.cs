@@ -7,7 +7,7 @@ namespace TodoApp.API.Dtos.Requests
     /// <summary>
     /// User account login request
     /// </summary>
-    public record LoginRequestDto
+    public class LoginRequestDto
     {
         /// <summary>
         /// Username of the account

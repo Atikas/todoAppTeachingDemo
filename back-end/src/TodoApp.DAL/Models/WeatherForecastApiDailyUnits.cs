@@ -18,6 +18,12 @@ namespace TodoApp.DAL.Models
 
         [JsonProperty("wind_speed_10m_max")]
         public string WindSpeed10mMax { get; set; }
+
+        [JsonProperty("uv_index_max")]
+        public string UvIndexMax { get; set; }
+
+        [JsonProperty("snowfall_sum")]
+        public string SnowfallSum { get; set; }
     }
 
 

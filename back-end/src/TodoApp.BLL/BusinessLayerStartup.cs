@@ -10,5 +10,6 @@ public static class BusinessLayerStartup
     {
         services.AddTransient<IAccountService, AccountService>();
         services.AddTransient<IEmailService, EmailService>();
+        services.AddTransient<IWeatherRecomendationService, WeatherRecomendationService>();
     }
 }

@@ -25,7 +25,7 @@ namespace TodoApp.DAL.Services
             _logger.LogInformation("GetWeatherForecastAsync called with latitude: {latitude}, longitude: {longitude}", latitude, longitude);
             var httpClient = _httpClientFactory.CreateClient("WeatherForecastApi");
             var route = "forecast";
-            var query = $"latitude={latitude}&longitude={longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max";
+            var query = $"latitude={latitude}&longitude={longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,uv_index_max,snowfall_sum";
             try
             {
                 var response = await httpClient.GetAsync($"{route}?{query}");

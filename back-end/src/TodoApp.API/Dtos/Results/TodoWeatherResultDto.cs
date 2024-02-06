@@ -7,5 +7,9 @@
         public string? TemperatureMax { get; set; }
         public string? Precipitation { get; set; }
         public string? Wind { get; set; }
+        public string? UvIndex { get; set; }
+        public string? Snowfall { get; set; }
+
+        public List<string>? Recommendation { get; set;}
     }
 }

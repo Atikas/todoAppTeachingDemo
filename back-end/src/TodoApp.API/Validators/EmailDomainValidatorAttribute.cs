@@ -20,6 +20,9 @@ public class EmailDomainValidatorAttribute : ValidationAttribute
 
             if (tldIndex <= atIndex+1)
                 return new ValidationResult("Invalid top-level domain.");
+
+            if (tldIndex == email.Length-1)
+                return new ValidationResult("Missing top-level domain.");
         }
 
         return ValidationResult.Success!;

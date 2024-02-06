@@ -7,6 +7,7 @@ namespace TodoApp.API.Validators;
 public class PasswordValidatorAttribute : ValidationAttribute
 {
     public int MinimumLength { get; set; } = 4;
+    public int MaximumLength { get; set; } = 60;
     public bool RequireUppercase { get; set; } = false;
     public bool RequireLowercase { get; set; } = false;
     public bool RequireDigit { get; set; } = false;
@@ -29,6 +30,11 @@ public class PasswordValidatorAttribute : ValidationAttribute
         if (password.Length < MinimumLength)
         {
             return new ValidationResult($"Password must be at least {MinimumLength} characters long.");
+        }
+
+        if (password.Length > MaximumLength)
+        {
+            return new ValidationResult($"Password must be at most {MaximumLength} characters long.");
         }
 
         if (RequireUppercase && !password.Any(char.IsUpper))

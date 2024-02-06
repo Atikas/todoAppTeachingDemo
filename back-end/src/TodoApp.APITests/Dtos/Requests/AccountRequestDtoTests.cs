@@ -11,15 +11,30 @@ namespace TodoApp.APITests.Dtos.Requests
     {
 
         /// <summary>
-        /// required validation for the username input testing
+        /// username input validation RBVT
         /// </summary>
-        [Fact] 
-        public void Username_WhenNull_ShouldFailValidation()
+        public static IEnumerable<object[]> UserNameValidationData =>
+           new List<object[]>
+           {
+                new object[] { null, false }, // required validation for the password input testing
+                new object[] { "ab", false }, // value just below minimum boundry
+                new object[] { "abc", true }, // value on minimum boundry
+                new object[] { "abcd", true }, // value just above minimum boundry
+                new object[] { new string('a', 49), true }, // value just below maximum boundry
+                new object[] { new string('a', 50), true }, // value on maximum boundry
+                new object[] { new string('a', 51), false }, // value just above maximum 
+                new object[] { new string('a', 25), true }, // value inside middle of boundry
+           };
+
+       
+        [Theory]
+        [MemberData(nameof(UserNameValidationData))]
+        public void UserName_ValidationTests(string userName, bool expectedIsValid)
         {
             // Arrange
             var accountRequestDto = new AccountRequestDto
             {
-                UserName = null,
+                UserName = userName,
                 Password = "P@$$w0rd",
                 Role = "User"
             };
@@ -30,139 +45,42 @@ namespace TodoApp.APITests.Dtos.Requests
             var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
 
             // Assert
-            Assert.False(result);
+            Assert.Equal(expectedIsValid, result);
         }
 
-        /// <summary>
-        /// minimum value that the username input can legally take
-        /// </summary>
-        [Fact] 
-        public void UserName_WhenLength3_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto 
-            { 
-                UserName = "abc", 
-                Password = "P@$$w0rd", 
-                Role = "User" 
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
 
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
+        //---------------------------------------------------------------------------
 
-            // Assert
-            Assert.True(result);
-        }
 
         /// <summary>
-        /// value just outside minimum the username legal boundaries of the input domains
+        /// password input validation RBVT
         /// </summary>
-        [Fact] 
-        public void UserName_WhenLength2_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
+        public static IEnumerable<object[]> PasswordValidationData =>
+            new List<object[]>
             {
-                UserName = "ab",
-                Password = "P@$$w0rd",
-                Role = "User"
+                new object[] { null, false }, // required validation for the password input testing
+                new object[] { "A1!", false }, // value just below minimum boundry
+                new object[] { "A1!d", true }, // value on minimum boundry
+                new object[] { "A1!de", true }, // value just above minimum boundry
+                new object[] { "A1!" + new string('a', 56), true }, // value just below maximum boundry
+                new object[] { "A1!" + new string('a', 57), true }, // value on maximum boundry
+                new object[] { "A1!" + new string('a', 58), false }, // value just above maximum 
+                new object[] { "A1!" + new string('a', 27), true }, // value inside middle of boundry
+                new object[] { "password", true }, // upper case requirement for the password input testing
+                new object[] { "PASSWORD", true }, // lower case requirement for the password input testing
+                new object[] { "Password", true }, // digit requirement for the password input testing
+                new object[] { "Password1", true }, // special character requirement for the password input testing
             };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
 
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        /// <summary>
-        /// maximum value that the username input can legally take
-        /// </summary>
-        [Fact] 
-        public void UserName_WhenLength50_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = new string('a', 50), 
-                Password = "P@$$w0rd", 
-                Role = "User" 
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-
-        }
-
-        /// <summary>
-        /// value just outside maximum the legal boundaries of the username input domains
-        /// </summary>
-        [Fact] 
-        public void UserName_WhenLength51_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = new string('a', 51),
-                Password = "P@$$w0rd",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-
-        }
-
-        /// <summary>
-        ///  value inside middle of the legal boundaries of the username input domains
-        /// </summary>
-        [Fact] 
-        public void UserName_WhenLength25_ShouldPassValidationd()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = new string('a', 25),
-                Password = "P@$$w0rd",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        //------------ Password Validation Tests ------------
-        
-        /// <summary>
-        /// required validation for the password input testing
-        /// </summary>
-        [Fact] 
-        public void Password_WhenNull_ShouldFailValidation()
+        [Theory]
+        [MemberData(nameof(PasswordValidationData))]
+        public void Password_ValidationTests(string password, bool expectedIsValid)
         {
             // Arrange
             var accountRequestDto = new AccountRequestDto
             {
                 UserName = "abc",
-                Password = null,
+                Password = password,
                 Role = "User"
             };
             var validationContext = new ValidationContext(accountRequestDto);
@@ -172,179 +90,58 @@ namespace TodoApp.APITests.Dtos.Requests
             var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
 
             // Assert
-            Assert.False(result);
+            Assert.Equal(expectedIsValid, result);
         }
 
+        //---------------------------------------------------------------------------
+
+
         /// <summary>
-        /// minimum value that the password input can legally take
+        /// email input validation RBVT
         /// </summary>
-        [Fact] 
-        public void Password_WhenLength4_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
+        public static IEnumerable<object[]> EmailValidationData =>
+            new List<object[]>
             {
-                UserName = "abc",
-                Password = "abcd",
-                Role = "User"
+                //Invalid Email Addresses (Outside Boundaries):
+                new object[] { "", false }, // (empty string): Tests absence of input.
+                new object[] { "test", false }, // Email without @ is invalid
+                new object[] { "@domain.com", false }, // Missing local part.
+                new object[] { "test@", false }, // Missing domain part
+                new object[] { "@test", false }, // Email without user part is invalid
+                new object[] { "test@domain", false }, // Missing top-level domain.
+                new object[] { "test@domain.", false }, // Email with . at the end is invalid
+                new object[] { "test@.com", false }, // Domain starts with a prohibited character.
+                //TODO new object[] { "test@domain..com", false }, // Double dot in domain.
+                new object[] { "test@domain.com.", false }, // Domain ends with a dot.
+                //TODO new object[] { "test@domain.com.a", false }, //TLD is one character (may be considered valid in some contexts, but typically TLDs are at least two characters).
+                //TODO new object[] { "test@-domain.com", false }, // Domain starts with a prohibited character (hyphen).
+                //TODO new object[] { "test@domain.com-", false }, //Domain ends with a prohibited character (hyphen).
+                //Valid Email Addresses (Within Boundaries):
+                new object[] { null, true }, // optional email input testing
+                new object[] { "test@domain.com", true }, // valid email input testing
+                //Email Addresses Testing Boundary Conditions:
+                new object[] { "a@b.com", true }, // Minimal valid email (shortest possible username and domain with a single-character each).
+                new object[] { "test@" + new string('a', 255) + ".com", true }, // Maximum length of domain  part.
+                new object[] { new string('a', 64) + "@domain.com", true }, // Maximum length of local part.
+                new object[] { "user..name@domain.com", true }, //Double dot in the local part, which is technically valid in quoted strings
+                //Special Characters Testing:
+                new object[] { "user.name+tag@domain.co.uk", true }, // An email with a dot and plus sign in the local part and a two-level domain.
+                new object[] { "user.name_tag@domain.co.uk", true }, //Underscore in local part.
+                new object[] { "user.name-tag@domain.co.uk", true }, //Hyphen in local part.
+                //TODO new object[] { "user,name@domain.co.uk", false }, //Comma is not allowed without quoting.
+                //International Characters and Extended Unicode
+                //TODO 用户@例子.广告
+                //TODO θσερ@εχαμπλε.ψομ
+                //TODO šis@lietuviškai.lt
+                //Special Cases:
+                new object[] { "user name@domain.com", true }, //Space in the local part, which is valid in quoted strings but often considered invalid.
+
             };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
 
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        /// <summary>
-        /// value just outside minimum the password legal boundaries of the input domains
-        /// </summary>
-        [Fact]
-        public void Password_WhenLength3_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "abc",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        /// <summary>
-        /// value inside of the legal boundaries of the password input domains
-        /// </summary>
-        [Fact]
-        public void Password_WhenLength50_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = new string('a', 50),
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        /// <summary>
-        /// upper case requirmenet for the password input testing
-        /// </summary>
-        [Fact]
-        public void Password_WhenNoUppercase_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "password",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        /// <summary>
-        /// lower case requirmenet for the password input testing
-        /// </summary>
-        [Fact]
-        public void Password_WhenNoLowercase_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "PASSWORD",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        /// <summary>
-        /// digit requirmenet for the password input testing
-        /// </summary>
-        [Fact]
-        public void Password_WhenNoDigit_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "Password",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-
-        /// <summary>
-        /// special character requirmenet for the password input testing
-        /// </summary>
-        [Fact]
-        public void Password_WhenNoSpecialCharacter_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "Password1",
-                Role = "User"
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-
-        //------------ Email Validation Tests ------------
-
-        /// <summary>
-        /// optional email input testing
-        /// </summary>
-        [Fact]
-        public void Email_WhenNull_ShouldPassValidation()
+       
+        [Theory]
+        [MemberData(nameof(EmailValidationData))]
+        public void Email_ValidationTests(string email, bool expectedIsValid)
         {
             // Arrange
             var accountRequestDto = new AccountRequestDto
@@ -352,7 +149,7 @@ namespace TodoApp.APITests.Dtos.Requests
                 UserName = "abc",
                 Password = "P@$$w0rd",
                 Role = "User",
-                Email = null
+                Email = email
             };
             var validationContext = new ValidationContext(accountRequestDto);
             var validationResults = new List<ValidationResult>();
@@ -361,135 +158,9 @@ namespace TodoApp.APITests.Dtos.Requests
             var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
 
             // Assert
-            Assert.True(result);
+            Assert.Equal(expectedIsValid, result);
         }
 
-
-        [Fact]
-        public void Email_WhenValid_ShouldPassValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "P@$$w0rd",
-                Role = "User",
-                Email = "user@example.com",
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void Email_WhenTopLevelDomainMissing_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "P@$$w0rd",
-                Role = "User",
-                Email = "user@example",
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void Email_WhenDomainMissing_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "P@$$w0rd",
-                Role = "User",
-                Email = "user@.com",
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void Email_WhenAtSymbolMissing_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "P@$$w0rd",
-                Role = "User",
-                Email = "userexample.com",
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void Email_WhenLocalPartMissing_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "P@$$w0rd",
-                Role = "User",
-                Email = "@example.com",
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void Email_WhenEmpty_ShouldFailValidation()
-        {
-            // Arrange
-            var accountRequestDto = new AccountRequestDto
-            {
-                UserName = "abc",
-                Password = "P@$$w0rd",
-                Role = "User",
-                Email = "",
-            };
-            var validationContext = new ValidationContext(accountRequestDto);
-            var validationResults = new List<ValidationResult>();
-
-            // Act
-            var result = Validator.TryValidateObject(accountRequestDto, validationContext, validationResults, true);
-
-            // Assert
-            Assert.False(result);
-        }
 
         //------------ Role Validation Tests ------------
 

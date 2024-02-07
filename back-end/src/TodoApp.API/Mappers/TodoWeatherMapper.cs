@@ -26,10 +26,7 @@ namespace TodoApp.API.Mappers
             {
                 var recommendationRequest = new WeatherRecomendationRequest(
                     item.Daily.temperature_2m_max[i],
-                    item.Daily.precipitation_sum[i],
-                    item.Daily.wind_speed_10m_max[i],
-                    item.Daily.uv_index_max[i],
-                    item.Daily.snowfall_sum[i]);
+                    item.Daily.precipitation_sum[i]);
 
                 result.Add(new TodoWeatherResultDto
                 {

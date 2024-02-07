@@ -10,7 +10,7 @@ namespace TodoApp.DAL.Entities
         public string Type { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
-        public string? Place { get; set; }
+        public Place? Place { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? Due { get; set; }
         public DateTime? CompletedAt { get; set; }
@@ -20,5 +20,15 @@ namespace TodoApp.DAL.Entities
 
         public Account Account { get; set; } = null!;
         public ICollection<Image> Images { get; set; } = null!;
+    }
+
+    public class Place
+    {
+        [Key]
+        public long Id { get; set; }
+        public string? Country { get; set; } = null!;
+        public string? City { get; set; } = null!;
+
+        public TodoItem TodoItem { get; set; } = null!;
     }
 }

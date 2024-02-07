@@ -23,7 +23,7 @@ namespace TodoApp.API.Mappers
                 Type = entity.Type,
                 Title = entity.Title,
                 Description = entity.Description,
-                Place = entity.Place,
+                Place = (entity.Place?.Country != null ? $"{entity.Place?.City}, {entity.Place?.Country}" : entity.Place?.City).Trim(',').Trim(' '),
                 CreatedAt = entity.CreatedAt,
                 Due = entity.Due,
                 CompletedAt = entity.CompletedAt,
@@ -40,7 +40,7 @@ namespace TodoApp.API.Mappers
                 Type = dto.Type!,
                 Title = dto.Title!,
                 Description = dto.Description,
-                Place = dto.Place,
+                Place = new Place {  City = dto.City, Country = dto.Country },
                 CreatedAt = DateTime.Now,
                 Due = dto.Due,
                 CompletedAt = dto.CompletedAt,
@@ -53,7 +53,10 @@ namespace TodoApp.API.Mappers
             to.Type = from.Type!;
             to.Title = from.Title!;
             to.Description = from.Description;
-            to.Place = from.Place;
+            if (to.Place == null)
+                to.Place = new Place();
+            to.Place.City = from.City;
+            to.Place.Country = from.Country;
             to.Due = from.Due;
             to.CompletedAt = from.CompletedAt;
         }

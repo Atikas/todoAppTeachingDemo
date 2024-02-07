@@ -56,11 +56,11 @@ namespace TodoApp.API.Controllers
             {
                 return NoContent();
             }
-
-            var geocodingResult = await _openMeteoClient.GetGeocodingAsync(place);
+            var placeName = (place.Country != null ? $"{place.City}, {place.Country}" : place.City).Trim(',').Trim(' ');
+            var geocodingResult = await _openMeteoClient.GetGeocodingAsync(placeName);
             if (geocodingResult == null)
             {
-                _logger.LogWarning("GetGeocodingAsync failed with location: {location}", place);
+                _logger.LogWarning("GetGeocodingAsync failed with location: {location}", placeName);
                 return NoContent();
             }
             var location = geocodingResult.results.FirstOrDefault();
@@ -69,7 +69,7 @@ namespace TodoApp.API.Controllers
                 var weather = await _openMeteoClient.GetWeatherForecastAsync(location.latitude, location.longitude);
                 if (weather == null)
                 {
-                    _logger.LogWarning("GetWeatherForecastAsync failed with location: {location}", place);
+                    _logger.LogWarning("GetWeatherForecastAsync failed with location: {location}", placeName);
                     return NoContent();
                 }
                 var result = _mapper.Map(weather);

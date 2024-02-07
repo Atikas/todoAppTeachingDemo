@@ -2,6 +2,7 @@
 
 namespace TodoApp.API.Validators;
 
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
 public class TodoTypeValidatorAttribute : ValidationAttribute
 {
     private readonly string[] validTypes = {"Holiday", "Work", "Shopping", "Other"};

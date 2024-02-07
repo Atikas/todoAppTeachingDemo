@@ -27,12 +27,21 @@ namespace TodoApp.DAL
 
                 modelBuilder.Entity<Image>()
                     .HasData(ImagesInitialDataSeed.Images);
+
+                modelBuilder.Entity<Place>()
+                    .HasData(PlacesInitialDataSeed.Places);
             }
 
             modelBuilder.Entity<Image>()
                 .HasOne(i => i.TodoItem)
                 .WithMany(t => t.Images)
                 .HasForeignKey(i => i.TodoItemId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TodoItem>()
+                .HasOne(i => i.Place)
+                .WithOne(t => t.TodoItem)
+                .HasForeignKey<Place>(i => i.Id)
                 .OnDelete(DeleteBehavior.Cascade);
         }
 

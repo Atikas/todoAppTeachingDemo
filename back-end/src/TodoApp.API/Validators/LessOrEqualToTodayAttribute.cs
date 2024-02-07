@@ -5,6 +5,7 @@ namespace TodoApp.API.Validators;
 /// <summary>
 /// Validation attribute to ensure a date is less than or equal to today.
 /// </summary>
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
 public class LessOrEqualToTodayAttribute : ValidationAttribute
 {
     /// <summary>

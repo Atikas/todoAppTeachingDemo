@@ -2,6 +2,7 @@
 
 namespace TodoApp.API.Validators;
 
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
 public class EmailDomainValidatorAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)

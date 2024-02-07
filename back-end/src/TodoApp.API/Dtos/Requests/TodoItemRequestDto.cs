@@ -30,7 +30,10 @@ namespace TodoApp.API.Dtos
         /// Place for the todoitem to be done
         /// </summary>
         [StringLength(100)]
-        public string? Place { get; set; }
+        public string? Country { get; set; }
+
+        [StringLength(100)]
+        public string? City { get; set; }
 
         /// <summary>
         /// Date and time when the todoitem is due

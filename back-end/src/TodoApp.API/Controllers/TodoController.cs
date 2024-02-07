@@ -5,6 +5,7 @@ using System.Security.Claims;
 using TodoApp.API.Dtos;
 using TodoApp.API.Dtos.Results;
 using TodoApp.API.Mappers.Interfaces;
+using TodoApp.API.Validators;
 using TodoApp.BLL.Services.Interfaces;
 using TodoApp.DAL.Repositories.Interfaces;
 
@@ -48,7 +49,7 @@ namespace TodoApp.API.Controllers
         public IActionResult Get()
         {
             _logger.LogInformation($"Getting all todos for user {_userId}");
-            var entities = _repository.GetAll().Where(e => e.AccountId == _userId);
+            var entities = _repository.GetAll(i => i.Place).Where(e => e.AccountId == _userId);
             var dtos = _mapper.Map(entities);
             return Ok(dtos);
         }
@@ -149,7 +150,7 @@ namespace TodoApp.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Multipart.FormData)]
-        public IActionResult UpdateDue([FromRoute]long id, [FromForm]DateTime due)
+        public IActionResult UpdateDue([FromRoute]long id, [FromForm][GreaterOrEqualToToday]DateTime due)
         {
             _logger.LogInformation($"Updating due date for todo with id {id} for user {_userId}");
             var entity = _repository.Get(id);

@@ -328,7 +328,7 @@ namespace TodoApp.APITests.Dtos.Requests
             {
                 Type = "Holiday",
                 Title = "Title",
-                Place = null, //<-- this is testing value
+                City = null, //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();
@@ -348,7 +348,7 @@ namespace TodoApp.APITests.Dtos.Requests
             {
                 Type = "Holiday",
                 Title = "Title",
-                Place = "", //<-- this is testing value
+                City = "", //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();
@@ -368,7 +368,7 @@ namespace TodoApp.APITests.Dtos.Requests
             {
                 Type = "Holiday",
                 Title = "Title",
-                Place = new string('a', 101), //<-- this is testing value
+                City = new string('a', 101), //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();
@@ -388,7 +388,7 @@ namespace TodoApp.APITests.Dtos.Requests
             {
                 Type = "Holiday",
                 Title = "Title",
-                Place = new string('a', 100), //<-- this is testing value
+                City = new string('a', 100), //<-- this is testing value
             };
             var validationContext = new ValidationContext(dto);
             var validationResults = new List<ValidationResult>();

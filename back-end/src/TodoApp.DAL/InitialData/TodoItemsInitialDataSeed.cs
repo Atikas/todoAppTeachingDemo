@@ -17,7 +17,6 @@ namespace TodoApp.DAL.InitialData
                 Type = "Holiday",
                 Title = "Holiday at Tenerife",
                 Description = "",
-                Place = "Tenerife",
                 CreatedAt = new DateTime(2024,1,1),
                 Due = new DateTime(2024,1,1),
                 CompletedAt = null,
@@ -29,8 +28,7 @@ namespace TodoApp.DAL.InitialData
                 Type = "Work",
                 Title = "Visit doctor",
                 Description = "",
-                Place = "Vilnius",
-                CreatedAt = new DateTime(2024,1,1),
+                CreatedAt = new DateTime(2024,1,2),
                 Due = new DateTime(2024,1,1),
                 CompletedAt = null,
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
@@ -41,8 +39,7 @@ namespace TodoApp.DAL.InitialData
                 Type = "Shopping",
                 Title = "Buy groceries",
                 Description = "",
-                Place = "Vilnius",
-                CreatedAt = new DateTime(2024,1,1),
+                CreatedAt = new DateTime(2024,1,6),
                 Due = new DateTime(2024,1,1),
                 CompletedAt = null,
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
@@ -53,8 +50,7 @@ namespace TodoApp.DAL.InitialData
                 Type = "Other",
                 Title = "Call plumber",
                 Description = "",
-                Place = "Ukmerge",
-                CreatedAt = new DateTime(2024,1,1),
+                CreatedAt = new DateTime(2024,1,6),
                 Due = new DateTime(2024,1,2),
                 CompletedAt = new DateTime(2024,1,2),
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
@@ -65,8 +61,7 @@ namespace TodoApp.DAL.InitialData
                 Type = "Other",
                 Title = "Call electrician",
                 Description = "",
-                Place = "Utena",
-                CreatedAt = new DateTime(2024,1,1),
+                CreatedAt = new DateTime(2024,1,12),
                 Due = new DateTime(2024,1,3),
                 CompletedAt = new DateTime(2024,1,4),
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
@@ -77,12 +72,26 @@ namespace TodoApp.DAL.InitialData
                 Type = "Work",
                 Title = "Complete assignment",
                 Description = "",
-                Place = "Online",
-                CreatedAt = new DateTime(2024,1,1),
+                Place = null,
+                CreatedAt = new DateTime(2024,1,22),
                 Due = new DateTime(2024,1,1),
                 CompletedAt = null,
                 AccountId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
             },
+        };
+
+       
+    }
+
+    public static class PlacesInitialDataSeed
+    {
+        public static List<Place> Places => new()
+        {
+            new Place { Id = 1, Country = "Tenerife" },
+            new Place { Id = 2, Country = "Lithuania", City = "Vilnius" },
+            new Place { Id = 3, City =  "Vilnius" },
+            new Place { Id = 4, City =  "Ukmerge" },
+            new Place { Id = 5, City =  "Utena" },
         };
     }
 }

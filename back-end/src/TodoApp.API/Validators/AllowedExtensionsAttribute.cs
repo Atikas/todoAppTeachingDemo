@@ -1,32 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TodoApp.API.Validators
-{
-    public class AllowedExtensionsAttribute: ValidationAttribute
-    {
-        private readonly string[] _extensions;
+namespace TodoApp.API.Validators;
 
-        public AllowedExtensionsAttribute(string[] extensions)
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+public class AllowedExtensionsAttribute: ValidationAttribute
+{
+    private readonly string[] _extensions;
+
+    public AllowedExtensionsAttribute(string[] extensions)
+    {
+        _extensions = extensions;
+    }
+
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+    {
+        if (value is not string fileName)
         {
-            _extensions = extensions;
+            return ValidationResult.Success;
         }
 
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        foreach (var extension in _extensions)
         {
-            if (value is not string fileName)
+            if (fileName.EndsWith(extension))
             {
                 return ValidationResult.Success;
             }
-
-            foreach (var extension in _extensions)
-            {
-                if (fileName.EndsWith(extension))
-                {
-                    return ValidationResult.Success;
-                }
-            }
-
-            return new ValidationResult($"File extension not allowed. Allowed extensions: {string.Join(", ", _extensions)}");
         }
+
+        return new ValidationResult($"File extension not allowed. Allowed extensions: {string.Join(", ", _extensions)}");
     }
 }

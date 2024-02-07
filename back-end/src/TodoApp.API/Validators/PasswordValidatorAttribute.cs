@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace TodoApp.API.Validators;
 
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
 public class PasswordValidatorAttribute : ValidationAttribute
 {
     public int MinimumLength { get; set; } = 4;

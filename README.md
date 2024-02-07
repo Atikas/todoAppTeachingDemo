@@ -14,6 +14,7 @@ Using a Todo application as the project's backbone, we aim to cover essential to
 - Error handling and validation
 - Consuming third-part API (Open Meteo)
 - Logging
+- Unit testing with xTest framework (ECT and RBVT approaches)
 - OpenAPI documentation
 - Best practices for structuring and testing your API
 

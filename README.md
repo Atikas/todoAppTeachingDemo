@@ -10,6 +10,8 @@ Using a Todo application as the project's backbone, we aim to cover essential to
 - Designing and implementing models, controllers, and routes
 - Performing CRUD operations
 - Integrating with a database using Entity Framework Core
+  - 1:1 relation between tables TodoItems and Place
+  - 1:M relation between tables TodoItems and Images
 - Implementing role based authentication and authorization
 - Error handling and validation
 - Consuming third-part API (Open Meteo)

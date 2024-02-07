@@ -21,14 +21,4 @@ namespace TodoApp.DAL.Entities
         public Account Account { get; set; } = null!;
         public ICollection<Image> Images { get; set; } = null!;
     }
-
-    public class Place
-    {
-        [Key]
-        public long Id { get; set; }
-        public string? Country { get; set; } = null!;
-        public string? City { get; set; } = null!;
-
-        public TodoItem TodoItem { get; set; } = null!;
-    }
 }

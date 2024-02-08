@@ -19,7 +19,6 @@ The third lecture of our ASP.NET Core Web API series dives into essential topics
 
 - **Scoped, Transient, Singleton Explanation**: Delve into the service lifetimes available in ASP.NET Core's dependency injection container. Understand when to use Scoped, Transient, or Singleton lifetimes for your services to ensure the appropriate object instance management and application behavior.
 
-- **Singleton vs Static**: Discuss the differences between singleton services managed by the ASP.NET Core DI container and static classes. We will cover their use cases, advantages, and potential pitfalls, guiding you towards making informed architectural decisions for your web API.
 
 ## Learning Outcomes
 

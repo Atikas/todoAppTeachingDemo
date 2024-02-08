@@ -23,7 +23,7 @@ namespace TodoApp.API.Mappers
                 Type = entity.Type,
                 Title = entity.Title,
                 Description = entity.Description,
-                Place = (entity.Place?.Country != null ? $"{entity.Place?.City}, {entity.Place?.Country}" : entity.Place?.City).Trim(',').Trim(' '),
+                Place = (entity.Place?.Country != null ? $"{entity.Place?.City}, {entity.Place?.Country}" : entity.Place?.City)?.Trim(',')?.Trim(' '),
                 CreatedAt = entity.CreatedAt,
                 Due = entity.Due,
                 CompletedAt = entity.CompletedAt,

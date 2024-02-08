@@ -46,10 +46,11 @@ namespace TodoApp.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<TodoItemResultDto>), StatusCodes.Status200OK)]
         [Produces(MediaTypeNames.Application.Json)]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             _logger.LogInformation($"Getting all todos for user {_userId}");
-            var entities = _repository.GetAll(i => i.Place).Where(e => e.AccountId == _userId);
+            var entities = _repository.GetAll(i => i.Place).Where(e => e.AccountId == _userId).ToList();
+
             var dtos = _mapper.Map(entities);
             return Ok(dtos);
         }

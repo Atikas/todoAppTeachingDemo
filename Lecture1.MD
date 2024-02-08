@@ -1,4 +1,4 @@
-
+# Lecture 1: Introduction to ASP.NET Core Web API
 Welcome to the first lecture of our ASP.NET Core Web API course! This session is designed to introduce you to the foundational concepts and components necessary for developing modern web APIs with ASP.NET Core in .NET 7/8. Whether you're new to API development or looking to update your skills, this lecture will provide you with a solid starting point.
 
 ## Topics Covered
